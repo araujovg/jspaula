@@ -20,9 +20,6 @@ public class PesquisaInclusaoServlet extends HttpServlet {
     public PesquisaInclusaoServlet() {
         super();
     }
-	
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Pesquisa pesquisa = new Pesquisa();
