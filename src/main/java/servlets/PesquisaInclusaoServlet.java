@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -31,6 +33,10 @@ public class PesquisaInclusaoServlet extends HttpServlet {
 		pesquisa.setCheck3(request.getParameter("p_ck3"));
 		pesquisa.setCivil(request.getParameter("p_civil"));
 		servicoBd.salvar(pesquisa);
+		
+		RequestDispatcher rd = request.getRequestDispatcher("/confirmaInsercao.jsp");
+        request.setAttribute("pesquisa", pesquisa);        
+        rd.forward(request, response);
 	}
 
 }
