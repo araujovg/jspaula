@@ -1,3 +1,4 @@
+<%@page import="java.util.List"%>
 <%@page import="entidades.Pesquisa"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
@@ -14,22 +15,47 @@
 </head>
 <body>
 	<div class="container mt-2">
-		<div class="card">
-			<div class="card-header">Dados inseridos com sucesso</div>
-			<div class="card-body">
-			<%
-				Pesquisa pesquisa = (Pesquisa) request.getAttribute("pesquisa");
-			%>
-				<h5 class="card-title"><%= pesquisa.getNome() %></h5>
-				<p class="card-text"><%= pesquisa.getEmail() %></p>
-				<p class="card-text"><%= pesquisa.getSexo() %></p>				
-				<p class="card-text"><%= pesquisa.getCivil() %></p>
-				<p>Generos de filmes que gosta:</p>
-				<p class="card-text"><%= pesquisa.getCheck1() == null ? "-" : pesquisa.getCheck1()  %></p>
-				<p class="card-text"><%= pesquisa.getCheck2() == null ? "-" : pesquisa.getCheck2()  %></p>
-				<p class="card-text"><%= pesquisa.getCheck3() == null ? "-" : pesquisa.getCheck3()  %></p>
-			</div>
-		</div>
+	
+	<div class="alert alert-success" role="alert">
+	  Gravado com sucesso.
+	</div>
+		
+	</div>
+	
+	<div class="container mt-2">
+		<table class="table table-hover">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">Nome</th>
+		      <th scope="col">Email</th>
+		      <th scope="col">Sexo</th>
+		      <th scope="col">Est. Civil</th>
+		      <th scope="col">Pref. 1</th>
+		      <th scope="col">Pref. 2</th>
+		      <th scope="col">Pref. 3</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+		  <% 
+		  	List<Pesquisa> pesquisas = (List<Pesquisa>) request.getAttribute("pesquisas");
+		  	for(Pesquisa pesquisa : pesquisas) {
+		  %>
+		    <tr>
+		      <th scope="row"><%= pesquisa.getId() %></th>
+		      <td><%= pesquisa.getNome() %></td>
+		      <td><%= pesquisa.getEmail() %></td>
+		      <td><%= pesquisa.getSexo() %></td>
+		      <td><%= pesquisa.getCivil() %></td>
+		      <td><%= pesquisa.getCheck1() == null ? "-" : pesquisa.getCheck1()  %></td>
+		      <td><%= pesquisa.getCheck2() == null ? "-" : pesquisa.getCheck2()  %></td>
+		      <td><%= pesquisa.getCheck3() == null ? "-" : pesquisa.getCheck3()  %></td>
+		    </tr>
+		    <%	
+		    } 
+		    %>
+		  </tbody>
+		</table>
 	</div>
 
 	<script

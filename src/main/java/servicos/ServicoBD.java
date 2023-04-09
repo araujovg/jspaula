@@ -37,7 +37,7 @@ public class ServicoBD {
 			pesquisaSalva.setCheck3(pesquisa.getCheck3());
 			pesquisaSalva.setCivil(pesquisa.getCivil());
 		}
-		return banco.addPesquisa(pesquisaSalva);
+		return banco.atualizar(pesquisaSalva);
 	}
 	
 	public boolean deletar(int id) {

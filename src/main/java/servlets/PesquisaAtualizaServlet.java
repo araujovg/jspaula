@@ -16,12 +16,12 @@ import servicos.ServicoBD;
 
 
 @SuppressWarnings("serial")
-@WebServlet("/PesquisaBuscaServlet")
-public class PesquisaBuscaServlet extends HttpServlet {
+@WebServlet("/PesquisaAtualizaServlet")
+public class PesquisaAtualizaServlet extends HttpServlet {
 	
 	private ServicoBD servicoBd = new ServicoBD();
 
-    public PesquisaBuscaServlet() {
+    public PesquisaAtualizaServlet() {
         super();
     }
     
@@ -31,15 +31,23 @@ public class PesquisaBuscaServlet extends HttpServlet {
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Pesquisa pesquisa = new Pesquisa();
-		pesquisa = servicoBd.procurarPeloEmail(request.getParameter("p_email"));
+		pesquisa = servicoBd.procurarPeloId(Integer.parseInt(request.getParameter("p_id")));
+		pesquisa.setNome(request.getParameter("p_nome"));
+		pesquisa.setEmail(request.getParameter("p_email"));
+		pesquisa.setSexo(request.getParameter("p_sexo"));
+		pesquisa.setCheck1(request.getParameter("p_ck1"));
+		pesquisa.setCheck2(request.getParameter("p_ck2"));
+		pesquisa.setCheck3(request.getParameter("p_ck3"));
+		pesquisa.setCivil(request.getParameter("p_civil"));
+		servicoBd.atualizar(pesquisa);
 		
 		if(Objects.isNull(pesquisa)) {
 			RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
 			rd.forward(request, response);
 		}
 		
-		RequestDispatcher rd = request.getRequestDispatcher("/resultadoBusca.jsp");
-        request.setAttribute("pesquisa", pesquisa);        
+		RequestDispatcher rd = request.getRequestDispatcher("/confirmaInsercao.jsp");
+        request.setAttribute("pesquisas", servicoBd.procurarTodos());        
         rd.forward(request, response);
 	}
 

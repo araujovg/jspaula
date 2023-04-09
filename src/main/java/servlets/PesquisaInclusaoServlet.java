@@ -35,7 +35,7 @@ public class PesquisaInclusaoServlet extends HttpServlet {
 		servicoBd.salvar(pesquisa);
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/confirmaInsercao.jsp");
-        request.setAttribute("pesquisa", pesquisa);        
+        request.setAttribute("pesquisas", servicoBd.procurarTodos());        
         rd.forward(request, response);
 	}
 

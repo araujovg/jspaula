@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import excecoes.ObjectNotFoundException;
+
 public class Banco {
 	
 private static List<Pesquisa> pesquisas = new ArrayList<>();
@@ -36,26 +38,49 @@ private static List<Pesquisa> pesquisas = new ArrayList<>();
 	public Pesquisa addPesquisa(Pesquisa novaPesquisa) {
 		pesquisas.add(novaPesquisa);
 		return novaPesquisa;
-	}	
+	}
+	
+	public Pesquisa atualizar(Pesquisa pesquisaAtualizada) {
+		Pesquisa pesquisa = procurarPeloId(pesquisaAtualizada.getId());
+		if(pesquisas.contains(pesquisa)) {
+			pesquisas.remove(pesquisa);
+			pesquisas.add(pesquisaAtualizada);			
+		}
+		return pesquisaAtualizada;
+	}
 	
 	public List<Pesquisa> getPesquisas(){
 		return Banco.pesquisas;
 	}
 	
 	public Pesquisa procurarPeloId(int id) {
-		return getPesquisas()
-				.stream()
-				.filter( p -> p.getId() == id)
-				.collect(Collectors.toList())
-				.get(0);
+		try {
+			Pesquisa pesquisa = getPesquisas()
+					.stream()
+					.filter( p -> p.getId() == id)
+					.collect(Collectors.toList())
+					.get(0);
+			
+			return pesquisa;
+		}
+		catch(IndexOutOfBoundsException e) {
+			return null;
+		}
+		 
 	}
 	
 	public Pesquisa procurarPeloEmail(String email) {
-		return getPesquisas()
-				.stream()
-				.filter( p -> p.getEmail().equals(email))
-				.collect(Collectors.toList())
-				.get(0);
+		try {
+			Pesquisa pesquisa = this.getPesquisas()
+					.stream()
+					.filter( p -> p.getEmail().equals(email))
+					.collect(Collectors.toList())
+					.get(0); 
+			return pesquisa;
+		}
+		catch(IndexOutOfBoundsException e) {
+			return null;
+		}
 	}
 	
 	public boolean deletar(int id) {
