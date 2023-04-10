@@ -34,6 +34,7 @@
 		      <th scope="col">Pref. 1</th>
 		      <th scope="col">Pref. 2</th>
 		      <th scope="col">Pref. 3</th>
+			  <th scope="col">A��o</th>
 		    </tr>
 		  </thead>
 		  <tbody>
@@ -50,9 +51,13 @@
 		      <td><%= pesquisa.getCheck1() == null ? "-" : pesquisa.getCheck1()  %></td>
 		      <td><%= pesquisa.getCheck2() == null ? "-" : pesquisa.getCheck2()  %></td>
 		      <td><%= pesquisa.getCheck3() == null ? "-" : pesquisa.getCheck3()  %></td>
+			  <td>
+			  	<a class="btn btn-primary" href="http://localhost:8085/jspaula/PesquisaBuscaServlet?p_email=<%= pesquisa.getEmail() %>" role="button">Atualizar</a>
+			  	<a class="btn btn-danger" href="/jspaula/PesquisaExcluirServlet?p_id=<%= pesquisa.getId() %>" role="button">Excluir</a>
+			  </td>
 		    </tr>
-		    <%	
-		    } 
+		    <%
+		  	}
 		    %>
 		  </tbody>
 		</table>

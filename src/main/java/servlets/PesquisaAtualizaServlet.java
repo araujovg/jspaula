@@ -32,6 +32,12 @@ public class PesquisaAtualizaServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Pesquisa pesquisa = new Pesquisa();
 		pesquisa = servicoBd.procurarPeloId(Integer.parseInt(request.getParameter("p_id")));
+
+		if(Objects.isNull(pesquisa)) {
+			RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
+			rd.forward(request, response);
+		}
+
 		pesquisa.setNome(request.getParameter("p_nome"));
 		pesquisa.setEmail(request.getParameter("p_email"));
 		pesquisa.setSexo(request.getParameter("p_sexo"));
@@ -41,10 +47,7 @@ public class PesquisaAtualizaServlet extends HttpServlet {
 		pesquisa.setCivil(request.getParameter("p_civil"));
 		servicoBd.atualizar(pesquisa);
 		
-		if(Objects.isNull(pesquisa)) {
-			RequestDispatcher rd = request.getRequestDispatcher("/erro.jsp");
-			rd.forward(request, response);
-		}
+
 		
 		RequestDispatcher rd = request.getRequestDispatcher("/confirmaInsercao.jsp");
         request.setAttribute("pesquisas", servicoBd.procurarTodos());        

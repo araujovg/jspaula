@@ -1,7 +1,9 @@
 package entidades;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import excecoes.ObjectNotFoundException;
@@ -44,12 +46,14 @@ private static List<Pesquisa> pesquisas = new ArrayList<>();
 		Pesquisa pesquisa = procurarPeloId(pesquisaAtualizada.getId());
 		if(pesquisas.contains(pesquisa)) {
 			pesquisas.remove(pesquisa);
-			pesquisas.add(pesquisaAtualizada);			
+			pesquisas.add(pesquisaAtualizada);
 		}
 		return pesquisaAtualizada;
 	}
 	
 	public List<Pesquisa> getPesquisas(){
+		List<Pesquisa> listaPesquisas = Banco.pesquisas.stream().sorted(Comparator.comparing(Pesquisa::getId)).collect(Collectors.toList());
+		Banco.pesquisas = listaPesquisas;
 		return Banco.pesquisas;
 	}
 	
@@ -83,8 +87,10 @@ private static List<Pesquisa> pesquisas = new ArrayList<>();
 		}
 	}
 	
-	public boolean deletar(int id) {
-		return getPesquisas().remove(procurarPeloId(id));
+	public void deletar(int id) {
+		List<Pesquisa> novaListaPesquisas = Banco.pesquisas.stream().filter(p -> id != p.getId()).collect(Collectors.toList());
+		Banco.pesquisas = novaListaPesquisas;
 	}
+	
 	
 }

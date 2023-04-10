@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<a class="btn btn-primary" href="/jspaula/ListaPesquisasServlet" role="button">Listar Pesquisas</a>
 	<div class="container">
 		<h1>Dados para pesquisa</h1>
 	    <form action="http://localhost:8085/jspaula/PesquisaAtualizaServlet" method="post">
@@ -83,7 +84,8 @@
 	
 	
 	  	<button type="submit" class="btn btn-primary">Enviar</button>
-	  	<button type="reset" class="btn btn-danger">Limpar</button>
+	  	<button type="reset" class="btn btn-warning">Limpar</button>
+	  	<a class="btn btn-danger" href="/jspaula/PesquisaExcluirServlet?p_id=<%= pesquisa.getId() %>" role="button">Excluir</a>
 	
 	    </form>
 	</div>

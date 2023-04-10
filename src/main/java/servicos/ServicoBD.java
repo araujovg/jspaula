@@ -40,8 +40,8 @@ public class ServicoBD {
 		return banco.atualizar(pesquisaSalva);
 	}
 	
-	public boolean deletar(int id) {
-		return banco.deletar(id);
+	public void deletar(int id) {
+		banco.deletar(id);
 	}
 	
 	public List<Pesquisa> procurarTodos() {	
