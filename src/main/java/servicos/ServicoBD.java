@@ -15,13 +15,14 @@ public class ServicoBD {
 		List<Pesquisa> pesquisas = procurarTodos();
 		
 		if(!pesquisas.isEmpty()) {
-			Pesquisa ultimaPesquisa = pesquisas.get(pesquisas.size() - 1);
+			int ultimoIndice = pesquisas.size() - 1;
+			Pesquisa ultimaPesquisa = pesquisas.get(ultimoIndice);
 			pesquisa.setId(ultimaPesquisa.getId() + 1);				
-			return banco.addPesquisa(pesquisa);
+			return banco.salvar(pesquisa);
 		}
 		else {
 			pesquisa.setId(1);
-			return banco.addPesquisa(pesquisa);
+			return banco.salvar(pesquisa);
 		}
 	}
 	

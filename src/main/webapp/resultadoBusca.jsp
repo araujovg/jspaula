@@ -12,17 +12,16 @@
 <a class="btn btn-primary" href="/jspaula/ListaPesquisasServlet" role="button">Listar Pesquisas</a>
 	<div class="container">
 		<h1>Dados para pesquisa</h1>
-	    <form action="http://localhost:8085/jspaula/PesquisaAtualizaServlet" method="post">
-	    <% Pesquisa pesquisa = (Pesquisa) request.getAttribute("pesquisa"); %>
-	    <input type="hidden" name="p_id" value="<%= pesquisa.getId() %>">
+	    <form action="/jspaula/PesquisaAtualizaServlet" method="post">
+	    <input type="hidden" name="p_id" value="${ pesquisa.id }">
 	    <div class="mb-3">
 		  <label class="form-label">Nome</label>
-		  <input type="text" name="p_nome" class="form-control" size="20" value="<%= pesquisa.getNome() %>">
+		  <input type="text" name="p_nome" class="form-control" size="20" value="${ pesquisa.nome }>">
 		</div>
 		
 		<div class="mb-3">
 		  <label class="form-label">Email</label>
-		  <input type="email" name="p_email" class="form-control" size="20" placeholder="name@example.com" value="<%= pesquisa.getEmail() %>">
+		  <input type="email" name="p_email" class="form-control" size="20" placeholder="name@example.com" value="${ pesquisa.email }">
 		</div>
 		
 		<div class="card mb-3">
@@ -31,14 +30,14 @@
 		  </div>
 		  <div class="card-body">
 		    <div class="form-check">
-			  <input class="form-check-input" type="radio" name="p_sexo" value="masculino" checked="<%= pesquisa.getSexo().equals("masculino") %>" value="masculino">
+			  <input class="form-check-input" type="radio" name="p_sexo" value="masculino" checked="${ pesquisa.nome eq "masculino" }" value="masculino">
 			  <label class="form-check-label">
 			    Masculino
 			  </label>
 			</div>
 		
 			<div class="form-check">
-			  <input class="form-check-input" type="radio" name="p_sexo" value="feminino" checked="<%= pesquisa.getSexo().equals("feminino") %>">
+			  <input class="form-check-input" type="radio" name="p_sexo" value="feminino" checked="${ pesquisa.nome eq "feminino" }">
 			  <label class="form-check-label">
 			    Feminino
 			  </label>
@@ -52,21 +51,21 @@
 		  </div>
 		  <div class="card-body">
 		  	<div class="form-check">
-			  <input class="form-check-input" type="checkbox" name="p_ck1" value="romance" checked="<%= pesquisa.getCheck1() != null ? "checked" : "" %>">
+			  <input class="form-check-input" type="checkbox" name="p_ck1" value="romance" ${ pesquisa.check1 != null ? "checked" : "" }>
 			  <label class="form-check-label">
 			    Romance
 			  </label>
 			</div>
 			
 			<div class="form-check">
-			  <input class="form-check-input" type="checkbox" name="p_ck2" value="aventura" checked="<%= pesquisa.getCheck2() != null ? "checked" : "" %>">
+			  <input class="form-check-input" type="checkbox" name="p_ck2" value="aventura" ${ pesquisa.check2 != null ? "checked" : "" }>
 			  <label class="form-check-label">
 			    Aventura
 			  </label>
 			</div>
 			
 			<div class="form-check">
-			  <input class="form-check-input" type="checkbox" name="p_ck3" value="ficção" <%= pesquisa.getCheck3() != null ? "checked" : "" %>>
+			  <input class="form-check-input" type="checkbox" name="p_ck3" value="ficção" ${ pesquisa.check3 != null ? "checked" : "" }>
 			  <label class="form-check-label">
 			    Ficção
 			  </label>
@@ -76,16 +75,16 @@
 		
 		<div class="mb-3">
 			<select class="form-select" name="p_civil">
-			  <option value="solteiro(a)" <%= pesquisa.getCivil().equals("solteiro(a)") ? "selected" : "" %>>Solteiro</option>
-			  <option value="casado(a)" <%= pesquisa.getCivil().equals("casado(a)") ? "selected" : "" %>>Casado</option>
-			  <option value="viuvo(a)" <%= pesquisa.getCivil().equals("viuvo(a)") ? "selected" : "" %>>Viúvo</option>
+			  <option value="solteiro(a)" ${ pesquisa.civil eq "solteiro(a)" ? "selected" : "" } >Solteiro</option>
+			  <option value="casado(a)" ${ pesquisa.civil eq "casado(a)" ? "selected" : "" } >Casado</option>
+			  <option value="viuvo(a)" ${ pesquisa.civil eq "viuvo(a)" ? "selected" : "" } >Viúvo</option>
 			</select>
 		</div>
 	
 	
 	  	<button type="submit" class="btn btn-primary">Enviar</button>
 	  	<button type="reset" class="btn btn-warning">Limpar</button>
-	  	<a class="btn btn-danger" href="/jspaula/PesquisaExcluirServlet?p_id=<%= pesquisa.getId() %>" role="button">Excluir</a>
+	  	<a class="btn btn-danger" href="/jspaula/PesquisaExcluirServlet?p_id=${ pesquisa.id }" role="button">Excluir</a>
 	
 	    </form>
 	</div>

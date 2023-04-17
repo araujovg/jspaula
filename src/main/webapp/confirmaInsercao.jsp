@@ -2,6 +2,7 @@
 <%@page import="entidades.Pesquisa"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,31 +35,51 @@
 		      <th scope="col">Pref. 1</th>
 		      <th scope="col">Pref. 2</th>
 		      <th scope="col">Pref. 3</th>
-			  <th scope="col">A��o</th>
+			  <th scope="col">A��es</th>
 		    </tr>
 		  </thead>
 		  <tbody>
-		  <% 
-		  	List<Pesquisa> pesquisas = (List<Pesquisa>) request.getAttribute("pesquisas");
-		  	for(Pesquisa pesquisa : pesquisas) {
-		  %>
-		    <tr>
-		      <th scope="row"><%= pesquisa.getId() %></th>
-		      <td><%= pesquisa.getNome() %></td>
-		      <td><%= pesquisa.getEmail() %></td>
-		      <td><%= pesquisa.getSexo() %></td>
-		      <td><%= pesquisa.getCivil() %></td>
-		      <td><%= pesquisa.getCheck1() == null ? "-" : pesquisa.getCheck1()  %></td>
-		      <td><%= pesquisa.getCheck2() == null ? "-" : pesquisa.getCheck2()  %></td>
-		      <td><%= pesquisa.getCheck3() == null ? "-" : pesquisa.getCheck3()  %></td>
-			  <td>
-			  	<a class="btn btn-primary" href="http://localhost:8085/jspaula/PesquisaBuscaServlet?p_email=<%= pesquisa.getEmail() %>" role="button">Atualizar</a>
-			  	<a class="btn btn-danger" href="/jspaula/PesquisaExcluirServlet?p_id=<%= pesquisa.getId() %>" role="button">Excluir</a>
-			  </td>
-		    </tr>
-		    <%
-		  	}
-		    %>
+		  <c:forEach items="${ pesquisas }" var="pesquisa">
+			  <tr>
+			      <th scope="row">${ pesquisa.id }</th>
+			      <td>${ pesquisa.nome }</td>
+			      <td>${ pesquisa.email }</td>
+			      <td>${ pesquisa.sexo }</td>
+			      <td>${ pesquisa.civil }</td>
+				  <c:choose>
+				  	<c:when test="${ pesquisa.check1 != null }">
+						<td>${ pesquisa.check1 }</td>
+					</c:when>
+					<c:otherwise>
+						<td> - </td>
+					</c:otherwise>
+				  </c:choose>
+
+				  <c:choose>
+				  	<c:when test="${ pesquisa.check2 != null }">
+						<td>${ pesquisa.check2 }</td>
+					</c:when>
+					<c:otherwise>
+						<td> - </td>
+					</c:otherwise>
+				  </c:choose>
+
+				  <c:choose>
+				  	<c:when test="${ pesquisa.check3 != null }">
+						<td>${ pesquisa.check3 }</td>
+					</c:when>
+					<c:otherwise>
+						<td> - </td>
+					</c:otherwise>
+				  </c:choose>
+
+				  <td>
+				  	<a class="btn btn-primary" href="/jspaula/PesquisaBuscaServlet?p_email=${ pesquisa.email }" role="button">Atualizar</a>
+				  	<a class="btn btn-danger" href="/jspaula/PesquisaExcluirServlet?p_id=${ pesquisa.id }" role="button">Excluir</a>
+				  </td>
+			    </tr>
+		  </c:forEach>
+
 		  </tbody>
 		</table>
 	</div>

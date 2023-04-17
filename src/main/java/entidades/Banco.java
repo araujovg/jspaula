@@ -37,7 +37,7 @@ private static List<Pesquisa> pesquisas = new ArrayList<>();
 		pesquisas.add(p2);
 	}
 
-	public Pesquisa addPesquisa(Pesquisa novaPesquisa) {
+	public Pesquisa salvar(Pesquisa novaPesquisa) {
 		pesquisas.add(novaPesquisa);
 		return novaPesquisa;
 	}
